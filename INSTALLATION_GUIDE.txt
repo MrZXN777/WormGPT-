@@ -1,0 +1,408 @@
+================================================================================
+                    WORMGPT OLLAMA UI - INSTALLATION GUIDE
+                          Complete Setup Instructions
+                               Version 1.0 - 2026
+================================================================================
+
+TABLE OF CONTENTS
+-----------------
+1. Prerequisites
+2. Installation Steps
+3. Common Issues & Fixes
+4. Bypassing Security Restrictions
+5. Advanced Configuration
+6. Deployment Options
+7. Troubleshooting Commands
+8. Quick Start Guide
+
+================================================================================
+1. PREREQUISITES
+================================================================================
+
+Before installing WormGPT, you need:
+
+A. Node.js (v18 or higher)
+   - Download: https://nodejs.org/
+   - Verify installation: node --version
+   - Should display: v18.0.0 or higher
+
+B. Ollama (AI Model Runtime)
+   - Download: https://ollama.ai/download
+   - Install and start the Ollama service
+   - Verify installation: ollama --version
+
+C. Recommended AI Model
+   - Run this command: ollama pull godmoded/llama3-lexi-uncensored
+   - This downloads the recommended model for WormGPT
+
+================================================================================
+2. INSTALLATION STEPS
+================================================================================
+
+STEP 1: EXTRACT ZIP FILE
+-------------------------
+Windows (PowerShell):
+  Expand-Archive -Path wormgpt-ollama-ui-secured.zip -DestinationPath C:\wormgpt
+  cd C:\wormgpt
+
+Mac/Linux:
+  unzip wormgpt-ollama-ui-secured.zip -d ~/wormgpt
+  cd ~/wormgpt
+
+STEP 2: INSTALL DEPENDENCIES
+-----------------------------
+Install pnpm (package manager):
+  npm install -g pnpm
+
+Install project dependencies:
+  pnpm install
+
+If you get permission errors:
+  Windows (Run PowerShell as Administrator):
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+  
+  Mac/Linux:
+    sudo npm install -g pnpm
+
+STEP 3: START OLLAMA SERVICE
+-----------------------------
+Windows:
+  Ollama should auto-start after installation
+  If not, run: ollama serve
+
+Mac/Linux:
+  ollama serve
+
+Keep this terminal window open!
+
+STEP 4: RUN WORMGPT
+-------------------
+Development mode (recommended for local use):
+  pnpm dev
+
+Production mode (using built files):
+  pnpm start
+
+STEP 5: OPEN IN BROWSER
+------------------------
+1. Open your web browser
+2. Go to: http://localhost:3000
+3. Enter password: Realnojokepplwazy1234
+4. Wait for "Setting up..." to complete
+5. Start chatting with WormGPT!
+
+================================================================================
+3. COMMON ISSUES & FIXES
+================================================================================
+
+ISSUE 1: "Port 3000 already in use"
+------------------------------------
+Windows:
+  netstat -ano | findstr :3000
+  taskkill /PID <PID_NUMBER> /F
+
+Mac/Linux:
+  lsof -ti:3000 | xargs kill -9
+
+Then restart: pnpm dev
+
+ISSUE 2: "Ollama connection failed"
+------------------------------------
+Check if Ollama is running:
+  curl http://localhost:11434/api/tags
+
+If not running, start it:
+  ollama serve
+
+Check firewall (Windows):
+  netsh advfirewall firewall add rule name="Ollama" dir=in action=allow protocol=TCP localport=11434
+
+ISSUE 3: "pnpm: command not found"
+-----------------------------------
+Use npm instead:
+  npm install
+  npm run dev
+
+ISSUE 4: "Cannot find module" errors
+-------------------------------------
+Clear cache and reinstall:
+  rm -rf node_modules
+  pnpm install --force
+
+Windows:
+  rmdir /s /q node_modules
+  pnpm install --force
+
+ISSUE 5: Anti-debug blocking DevTools
+--------------------------------------
+For development purposes, temporarily disable protection:
+1. Open: client/src/main.tsx
+2. Comment out this line: import "./lib/protection";
+3. Save and restart: pnpm dev
+
+================================================================================
+4. BYPASSING SECURITY RESTRICTIONS
+================================================================================
+
+BYPASS 1: Windows SmartScreen Warning
+--------------------------------------
+When Windows blocks the app:
+1. Click "More info"
+2. Click "Run anyway"
+
+BYPASS 2: Antivirus Blocking
+-----------------------------
+Add folder to antivirus exclusions:
+
+Windows Defender:
+1. Settings → Virus & threat protection
+2. Manage settings → Exclusions
+3. Add folder → Select C:\wormgpt
+
+Other Antivirus:
+  Consult your antivirus documentation to add exclusions
+
+BYPASS 3: Firewall Blocking Node.js
+------------------------------------
+Windows:
+  netsh advfirewall firewall add rule name="WormGPT" dir=in action=allow program="C:\Program Files\nodejs\node.exe" enable=yes
+
+Mac:
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /usr/local/bin/node
+
+BYPASS 4: Corporate Network Restrictions
+-----------------------------------------
+Use a different port:
+1. Open: package.json
+2. Find: "vite --host"
+3. Change to: "vite --host --port 8080"
+4. Access at: http://localhost:8080
+
+BYPASS 5: Permission Denied Errors
+-----------------------------------
+Windows (Run as Administrator):
+  Right-click PowerShell → Run as Administrator
+  cd C:\wormgpt
+  pnpm install
+
+Mac/Linux:
+  sudo chown -R $USER:$USER ~/wormgpt
+  cd ~/wormgpt
+  pnpm install
+
+================================================================================
+5. ADVANCED CONFIGURATION
+================================================================================
+
+CHANGE OLLAMA URL
+-----------------
+1. Open WormGPT in browser
+2. Click Settings icon (gear)
+3. Change "Ollama URL" field
+4. Click "Test Connection"
+5. Click "Save"
+
+USE DIFFERENT AI MODELS
+-----------------------
+Pull additional models:
+  ollama pull mistral
+  ollama pull codellama
+  ollama pull llama2
+  ollama pull phi
+
+Select model in WormGPT:
+1. Open Settings
+2. Click "Model" dropdown
+3. Select your preferred model
+
+ENABLE HTTPS FOR REMOTE ACCESS
+-------------------------------
+Install mkcert:
+  npm install -g mkcert
+
+Create certificates:
+  mkcert -install
+  mkcert localhost 127.0.0.1 ::1
+
+Update vite.config.ts with HTTPS settings (advanced)
+
+CUSTOMIZE THEME
+---------------
+1. Open Settings
+2. Toggle "Theme" switch
+3. Choose Dark or Light mode
+
+ADJUST AI BEHAVIOR
+------------------
+In Settings, you can adjust:
+- Temperature (0-2): Controls creativity
+- Stream Speed: How fast responses appear
+- Font Size: Adjust text size
+
+================================================================================
+6. DEPLOYMENT OPTIONS
+================================================================================
+
+OPTION 1: LOCAL NETWORK ACCESS
+-------------------------------
+Find your computer's IP address:
+  Windows: ipconfig
+  Mac/Linux: ifconfig
+
+Look for "IPv4 Address" (e.g., 192.168.1.100)
+
+Access from other devices on same network:
+  http://YOUR_IP:3000
+
+Example: http://192.168.1.100:3000
+
+OPTION 2: PRODUCTION BUILD
+---------------------------
+Build optimized version:
+  pnpm build
+
+Run production server:
+  pnpm start
+
+Access at: http://localhost:3000
+
+OPTION 3: DOCKER DEPLOYMENT (Advanced)
+---------------------------------------
+Note: Dockerfile not included, requires manual setup
+
+Create Dockerfile:
+  FROM node:18
+  WORKDIR /app
+  COPY . .
+  RUN pnpm install
+  RUN pnpm build
+  CMD ["pnpm", "start"]
+
+Build and run:
+  docker build -t wormgpt .
+  docker run -p 3000:3000 wormgpt
+
+================================================================================
+7. TROUBLESHOOTING COMMANDS
+================================================================================
+
+CHECK NODE VERSION
+------------------
+node --version
+
+CHECK IF PORT IS AVAILABLE
+---------------------------
+Windows:
+  netstat -an | findstr 3000
+
+Mac/Linux:
+  lsof -i:3000
+
+CHECK OLLAMA STATUS
+-------------------
+curl http://localhost:11434/api/tags
+
+LIST INSTALLED OLLAMA MODELS
+-----------------------------
+ollama list
+
+CLEAR BROWSER CACHE
+--------------------
+Chrome: Ctrl+Shift+Delete (Windows) or Cmd+Shift+Delete (Mac)
+Firefox: Ctrl+Shift+Delete (Windows) or Cmd+Shift+Delete (Mac)
+Edge: Ctrl+Shift+Delete
+
+RESTART EVERYTHING
+------------------
+Windows:
+  taskkill /F /IM node.exe
+  ollama serve
+  pnpm dev
+
+Mac/Linux:
+  pkill node
+  ollama serve
+  pnpm dev
+
+VIEW APPLICATION LOGS
+---------------------
+Development mode shows logs in terminal
+Check for errors in red text
+
+REINSTALL FROM SCRATCH
+-----------------------
+1. Delete node_modules folder
+2. Run: pnpm install
+3. Run: pnpm dev
+
+================================================================================
+8. QUICK START GUIDE (TL;DR)
+================================================================================
+
+For experienced users, here's the fastest way to get started:
+
+1. Extract ZIP:
+   unzip wormgpt-ollama-ui-secured.zip
+   cd wormgpt-ollama-ui
+
+2. Install dependencies:
+   pnpm install
+
+3. Start Ollama:
+   ollama serve
+
+4. Pull recommended model:
+   ollama pull godmoded/llama3-lexi-uncensored
+
+5. Run WormGPT:
+   pnpm dev
+
+6. Open browser:
+   http://localhost:3000
+   Password: Realnojokepplwazy1234
+
+7. Start chatting!
+
+================================================================================
+ADDITIONAL INFORMATION
+================================================================================
+
+DEFAULT PASSWORD
+----------------
+Realnojokepplwazy1234
+
+WATERMARK
+---------
+WormGPT is made by MRZXN
+Visit: mrzxnportal.netlify.app
+
+FEATURES
+--------
+- 70+ advanced features
+- Multi-model consensus mode
+- Context window visualizer
+- Conversation timeline replay
+- Web search & OSINT capabilities
+- Voice input & text-to-speech
+- Export/import conversations
+- Keyboard shortcuts
+- And much more!
+
+KEYBOARD SHORTCUTS
+------------------
+Ctrl+N: New conversation
+Ctrl+K: Search conversations
+Ctrl+S: Open settings
+Ctrl+/: Show shortcuts
+
+SUPPORT
+-------
+For custom websites and support:
+Visit: mrzxnportal.netlify.app
+
+================================================================================
+                              END OF GUIDE
+================================================================================
+
+Thank you for using WormGPT!
+Created by MRZXN - 2026
