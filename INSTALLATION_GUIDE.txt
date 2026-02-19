@@ -42,12 +42,8 @@ C. Recommended AI Model
 STEP 1: EXTRACT ZIP FILE
 -------------------------
 Windows (PowerShell):
-  Expand-Archive -Path wormgpt-ollama-ui-secured.zip -DestinationPath C:\wormgpt
+zip open
   cd C:\wormgpt
-
-Mac/Linux:
-  unzip wormgpt-ollama-ui-secured.zip -d ~/wormgpt
-  cd ~/wormgpt
 
 STEP 2: INSTALL DEPENDENCIES
 -----------------------------
@@ -60,9 +56,6 @@ Install project dependencies:
 If you get permission errors:
   Windows (Run PowerShell as Administrator):
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-  
-  Mac/Linux:
-    sudo npm install -g pnpm
 
 STEP 3: START OLLAMA SERVICE
 -----------------------------
@@ -100,9 +93,6 @@ ISSUE 1: "Port 3000 already in use"
 Windows:
   netstat -ano | findstr :3000
   taskkill /PID <PID_NUMBER> /F
-
-Mac/Linux:
-  lsof -ti:3000 | xargs kill -9
 
 Then restart: pnpm dev
 
@@ -183,11 +173,6 @@ BYPASS 5: Permission Denied Errors
 Windows (Run as Administrator):
   Right-click PowerShell → Run as Administrator
   cd C:\wormgpt
-  pnpm install
-
-Mac/Linux:
-  sudo chown -R $USER:$USER ~/wormgpt
-  cd ~/wormgpt
   pnpm install
 
 ================================================================================
