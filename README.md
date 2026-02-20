@@ -35,7 +35,7 @@ Password: **Realnojokepplwazy1234**
 ## 📋 Prerequisites
 - Node.js 18+
 - Ollama (auto-installed by install.sh)
-- macOS / Linux / WSL
+- windows
 
 ---
 
