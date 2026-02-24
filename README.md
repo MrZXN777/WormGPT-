@@ -114,3 +114,20 @@ wormgpt/
 ---
 
 **Created by MRZXN** — All rights reserved.
+
+Give donations to me if you went to, I will be so glad to have donation if you guys appreciate my work or get benefits from my tools it’s OK if you don’t want to ❤️
+
+💰LTC address- ltc1qwdznldtqsmwflap3sqwygk3yu5hl6nzt9dtakn
+
+💰BTC address- bc1q7wqda8tfhcaangakxfgmsl53vkl40tprdr2m4m
+
+💰ETH address- 0x9B6ce1B2D324325ee13F8426Abb0259e6A2eC9Bb
+
+💰USDT address Network (ERC20)- 0x9B6ce1B2D324325ee13F8426Abb0259e6A2eC9Bb
+
+You guys can give me small amount of stars too to @noodle_cup🎁 on telegram 
+
+Any request of any cryptocurrency message,
+You can donate me anything I mean anything DM @noodle_cup ⭐️ on telegram 
+
+Thank you guys for the support🍀
