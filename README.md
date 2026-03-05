@@ -1,6 +1,7 @@
 
 ![IMG_9757](https://github.com/user-attachments/assets/daae4913-17b4-46a3-8838-6a5c1e88e6a2)
 
+![IMG_2991](https://github.com/user-attachments/assets/2c56fde4-58c2-41a9-99cc-f3bad09d407b)
 
 # WormGPT-
 🔥 The WormGPT Ollama UI is complete with:   • All 70+ features implemented  • 3 revolutionary features (Context Visualizer, Multi-Model Consensus, Timeline Replay)  • Permanent unremovable watermark crediting MRZXN with mrzxnportal.netlify.app  • Professional ChatGPT-style design maintained
